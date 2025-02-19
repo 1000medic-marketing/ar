@@ -48,9 +48,9 @@
         scene.add(reticle);
       });
 
-      let flower;
+      let produto;
       loader.load("https://1000medic-marketing.github.io/ar/cubo/cubo.gltf", function(gltf) {
-        flower = gltf.scene;
+        produto = gltf.scene;
       });
 
       // Initialize a WebXR session
@@ -64,8 +64,8 @@
       const hitTestSource = await session.requestHitTestSource({ space: viewerSpace });
 
       session.addEventListener("select", (event) => {
-        if (flower) {
-          const clone = flower.clone();
+        if (produto) {
+          const clone = produto.clone();
           clone.position.copy(reticle.position);
           scene.add(clone);
         }
