@@ -21,8 +21,12 @@
       // Set up the Three.js scene
       const scene = new THREE.Scene();
 
+      // Luz ambiente
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      scene.add(ambientLight);
+
       // Add directional light
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
       directionalLight.position.set(10, 15, 10);
       scene.add(directionalLight);
 
