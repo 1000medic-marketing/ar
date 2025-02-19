@@ -51,6 +51,12 @@
       let produto;
       loader.load("https://1000medic-marketing.github.io/ar/cubo/cubo.glb", function(gltf) {
         produto = gltf.scene;
+        console.log("Modelo .glb carregado com sucesso!"); // Mensagem de sucesso
+      }, function ( xhr ) {
+        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' ); // Progresso do carregamento
+      }, function ( error ) {
+        console.error( 'Erro ao carregar o modelo .glb:', error ); // Mensagem de erro mais informativa
+        console.error( 'Detalhes do erro:', error.message, error.stack ); // Detalhes adicionais (se disponíveis)
       });
 
       // Initialize a WebXR session
