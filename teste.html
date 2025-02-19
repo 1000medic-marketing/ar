@@ -42,14 +42,14 @@
       // Load GLTF models
       const loader = new THREE.GLTFLoader();
       let reticle;
-      loader.load("https://immersive-web.github.io/webxr-samples/media/gltf/reticle/reticle.glb", function(gltf) {
+      loader.load("https://immersive-web.github.io/webxr-samples/media/gltf/reticle/reticle.gltf", function(gltf) {
         reticle = gltf.scene;
         reticle.visible = false;
         scene.add(reticle);
       });
 
       let produto;
-      loader.load("https://1000medic-marketing.github.io/ar/cubo/cubo.gltf", function(gltf) {
+      loader.load("https://1000medic-marketing.github.io/ar/cubo/cubo.glb", function(gltf) {
         produto = gltf.scene;
       });
 
