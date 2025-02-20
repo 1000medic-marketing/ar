@@ -170,8 +170,9 @@
 
     // Botão Iniciar Experiência AR
     document.getElementById('iniciarXRButton').addEventListener('click', () => {
-      activateXR(); // Inicia a experiência AR
-      document.getElementById('iniciarXRButton').style.display = 'none'; // Esconde o botão "Iniciar"
+        console.log("Botão 'Iniciar Experiência AR' clicado!"); // ADICIONE ESTA LINHA
+        activateXR(); // Chama a função para iniciar WebXR
+        document.getElementById('iniciarXRButton').style.display = 'none'; // Esconde o botão "Iniciar"
     });
 
     // Botões de Seleção de Modelo (agora visíveis APÓS iniciar AR)
