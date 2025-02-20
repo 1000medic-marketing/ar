@@ -1,0 +1,8 @@
+VM841:37274 WebXR emulator extension overrides native WebXR API with polyfill.
+web-client-content-script.js:2 Uncaught (in promise) Error: Access to storage is not allowed from this context.
+/favicon.ico:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 ()
+teste_f.html:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+teste_f.html:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
