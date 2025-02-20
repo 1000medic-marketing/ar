@@ -12,7 +12,7 @@
     body { margin: 0; font-family: sans-serif; }
     .buttons { position: fixed; top: 10px; left: 10px; display: flex; flex-direction: column; }
     button { margin-bottom: 5px; padding: 10px; cursor: pointer; }
-    #canvasContainer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; } /* Container for canvas */
+    #canvasContainer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
   </style>
 </head>
 <body>
@@ -22,7 +22,7 @@
     <button id="limparCenaButton">Limpar Cena</button>
     <button id="voltarButton">Voltar</button>
   </div>
-  <div id="canvasContainer"></div> <canvas id="xrCanvas" style="display: block;"></canvas>  </div>
+  <div id="canvasContainer"><canvas id="xrCanvas" style="display: block;"></canvas></div>
   <script>
     let modeloParaInstanciar = null; // Inicialmente nenhum modelo selecionado
     let reticle;
@@ -31,13 +31,13 @@
 
     async function activateXR() {
       // Add canvas and initialize WebGL context
-      const canvas = document.getElementById("xrCanvas"); // Get canvas by ID
-      document.getElementById("canvasContainer").appendChild(canvas); // Append to container
+      const canvas = document.getElementById("xrCanvas");
+      document.getElementById("canvasContainer").appendChild(canvas);
       const gl = canvas.getContext("webgl", {xrCompatible: true});
 
       // Set up the Three.js scene
       const scene = new THREE.Scene();
-      scene.background = null; // Make background transparent
+      scene.background = null;
 
       // Add directional light
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
@@ -45,7 +45,7 @@
       scene.add(directionalLight);
 
       // Add ambient light
-      const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+      const ambientLight = new THREE.AmbientLight(0x404040);
       scene.add(ambientLight);
 
       // Set up the WebGLRenderer
@@ -99,9 +99,8 @@
             const clone = sinoPowerSCena.clone();
             clone.position.copy(reticle.position);
             scene.add(clone);
-            modelosInstanciados.push(clone); // Adiciona ao array de modelos instanciados
-            modeloParaInstanciar = null; // Desseleciona após instanciar
-            reticle.visible = false;
+            modelosInstanciados.push(clone); // Adiciona ao array para limpeza
+            reticle.visible = true; // Retícula continua visível para mais instanciações
             console.log("SinoPower-S instanciado.");
           }
         } else if (modeloParaInstanciar === 'sino_d') {
@@ -109,9 +108,8 @@
             const clone = sinoPowerDCena.clone();
             clone.position.copy(reticle.position);
             scene.add(clone);
-            modelosInstanciados.push(clone); // Adiciona ao array de modelos instanciados
-            modeloParaInstanciar = null; // Desseleciona após instanciar
-            reticle.visible = false;
+            modelosInstanciados.push(clone); // Adiciona ao array para limpeza
+            reticle.visible = true; // Retícula continua visível para mais instanciações
             console.log("SinoPower-D instanciado.");
           }
         }
@@ -136,11 +134,11 @@
               const hitTestResults = frame.getHitTestResults(hitTestSource);
               if (hitTestResults.length > 0 && reticle) {
                   const hitPose = hitTestResults[0].getPose(referenceSpace);
-                  reticle.visible = true;
+                  reticle.visible = true; // Garante que a retícula fique visível
                   reticle.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z);
                   reticle.updateMatrixWorld(true);
               } else if (reticle) {
-                  reticle.visible = false;
+                  reticle.visible = false; // Esconde se não há hit test e modelo selecionado
               }
           } else if (reticle) {
               reticle.visible = false; // Garante que a retícula fique escondida quando nenhum modelo está selecionado
@@ -169,22 +167,22 @@
     // Botão Limpar Cena
     document.getElementById('limparCenaButton').addEventListener('click', () => {
       modelosInstanciados.forEach(modelo => {
-        scene.remove(modelo); // Remove cada modelo instanciado da cena
+        scene.remove(modelo);
       });
-      modelosInstanciados.length = 0; // Limpa o array de modelos instanciados
-      modeloParaInstanciar = null; // Desseleciona qualquer modelo
-      reticle.visible = false; // Esconde a retícula ao limpar a cena
+      modelosInstanciados.length = 0;
+      modeloParaInstanciar = null; // Desseleciona o modelo
+      reticle.visible = false; // Esconde retícula ao limpar cena
       console.log("Cena limpa.");
     });
 
-    // Botão Voltar (Reseta Seleção de Modelo)
+    // Botão Voltar (Desselecionar Modelo)
     document.getElementById('voltarButton').addEventListener('click', () => {
       modeloParaInstanciar = null; // Desseleciona o modelo
       reticle.visible = false; // Esconde a retícula ao "voltar"
-      console.log("Seleção de modelo resetada.");
+      console.log("Nenhum modelo selecionado.");
     });
 
-    // Iniciar Experiência WebXR ao carregar a página (opcional, pode usar botão "Iniciar Experiência" também)
+    // Iniciar Experiência WebXR (opcional)
     activateXR();
   </script>
 </body>
