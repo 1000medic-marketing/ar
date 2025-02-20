@@ -192,30 +192,43 @@
 
 
     function exitXR() {
-      if (session) {
-        session.end();
-        session = null;
-      }
+        console.log("Função exitXR() foi chamada!"); // Adicionado log no início
 
-      const startButton = document.querySelector('button');
-      const exitButton = document.getElementById('exitButton');
-      const instructions = document.getElementById('instructions');
+        if (session) {
+            console.log("Sessão WebXR existe:", session); // Verificando se a sessão existe
+            session.end().then(() => {
+            console.log("Sessão WebXR encerrada com sucesso."); // Log se session.end() for bem-sucedido
+            session = null; // Limpar a referência da sessão
+            }).catch((error) => {
+            console.error("Erro ao encerrar a sessão WebXR:", error); // Log em caso de erro ao encerrar
+            });
+        } else {
+            console.log("Nenhuma sessão WebXR ativa para encerrar."); // Log se não houver sessão
+        }
 
-      startButton.style.display = 'block';
-      exitButton.style.display = 'none';
-      instructions.style.display = 'none';
+        const startButton = document.querySelector('button');
+        const exitButton = document.getElementById('exitButton');
+        const instructions = document.getElementById('instructions');
 
-      if (canvas && canvas.parentNode) {
-        canvas.parentNode.removeChild(canvas);
-        renderer.dispose();
-        renderer = null;
-        scene.dispose();
-        scene = null;
-        camera = null;
-        modelosInstanciados = [];
-        modeloParaInstanciar = 'modelo1';
-        console.log("Sessão WebXR encerrada.");
-      }
+        startButton.style.display = 'block';
+        exitButton.style.display = 'none';
+        instructions.style.display = 'none';
+
+        if (canvas && canvas.parentNode) {
+            console.log("Canvas encontrado e será removido."); // Log antes de remover o canvas
+            canvas.parentNode.removeChild(canvas);
+            renderer.dispose();
+            renderer = null;
+            scene.dispose();
+            scene = null;
+            camera = null;
+            modelosInstanciados = [];
+            modeloParaInstanciar = 'modelo1';
+            console.log("Recursos limpos e variáveis resetadas."); // Log após limpeza de recursos
+            console.log("Sessão WebXR finalizada (processo exitXR concluído)."); // Log final da função
+        } else {
+            console.log("Canvas não encontrado ou já removido."); // Log se o canvas não for encontrado
+        }
     }
 
   </script>
