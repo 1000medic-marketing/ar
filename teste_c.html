@@ -47,10 +47,10 @@
       let produtoCena;
       let objetoCubo;
 
-      loader.load("https://1000medic-marketing.github.io/ar/cubo/cubo.glb", function(gltf) {
+      loader.load("https://1000medic-marketing.github.io/ar/sino_s/SinoPower-S_triangulate.glb", function(gltf) {
         produtoCena = gltf.scene;
         reticle = gltf.scene.getObjectByName('reticle'); // Assume que 'reticle' está no .glb
-        objetoCubo = gltf.scene.getObjectByName('Cubo'); // Substitua 'Cubo' pelo nome correto
+        objetoCubo = gltf.scene.getObjectByName('Injetora.SinoPower-S'); // Substitua 'Cubo' pelo nome correto
 
         if (reticle) {
           reticle.visible = false;
@@ -60,7 +60,7 @@
         }
 
         if (!objetoCubo) {
-          console.warn("Objeto com o nome 'Cubo' não encontrado no arquivo .glb. Verifique o nome no Blender.");
+          console.warn("Objeto com o nome 'Injetora.SinoPower-S' não encontrado no arquivo .glb. Verifique o nome no Blender.");
         }
 
       }, function ( xhr ) { /* ... */ }, function ( error ) { /* ... */ });
